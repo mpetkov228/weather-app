@@ -20,3 +20,11 @@ async function getCurrentWeatherData(location) {
     return data;
 }
 
+async function getForecastData(location) {
+    const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data;
+}
