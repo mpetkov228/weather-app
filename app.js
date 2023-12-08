@@ -8,6 +8,7 @@ city.addEventListener('keyup', async (event) => {
         let data = await getCurrentWeatherData(event.target.value);
         console.log(data);
         icon.src = data.current.condition.icon;
+        city.value = '';
     }
 });
 
