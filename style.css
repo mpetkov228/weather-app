@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    color: white;
 }
 
 body {
@@ -10,4 +11,9 @@ body {
     background-image: url("assets/backgrounds/sun-sunlight-bright-outdoor-sky.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+input {
+    background: none;
+    border: none;
 }

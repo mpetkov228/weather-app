@@ -1,13 +1,12 @@
 const API_KEY = '79d69622fa02417c8a8160044232011';
 
 const city = document.getElementById('location');
-const icon = document.getElementById('icon');
+const current = document.getElementById('current');
 
 city.addEventListener('keyup', async (event) => {
     if (event.key == 'Enter') {
         let data = await getCurrentWeatherData(event.target.value);
         console.log(data);
-        icon.src = data.current.condition.icon;
         city.value = '';
     }
 });
@@ -18,6 +17,8 @@ async function getCurrentWeatherData(location) {
     const response = await fetch(url);
     const data = await response.json();
 
+    console.log(data);
+
     return data;
 }
 
@@ -27,5 +28,10 @@ async function getForecastData(location) {
     const response = await fetch(url);
     const data = await response.json();
 
+    console.log(data);
+
     return data;
 }
+
+getCurrentWeatherData('Sofia');
+getForecastData('Sofia');
