@@ -33,5 +33,22 @@ async function getForecastData(location) {
     return data;
 }
 
-getCurrentWeatherData('Sofia');
-getForecastData('Sofia');
+async function processCurrentWeatherData() {
+    let data = await getCurrentWeatherData('Sofia');
+
+    return {
+        condition: data.current.condition.text,
+        location: data.location.name,
+        temp_c: data.current.temp_c,
+        temp_f: data.current.temp_f,
+        feelslike_c: data.current.feelslike_c,
+        fellslike_f: data.current.feelslike_f,
+        humidity: data.current.humidity,
+        is_day: data.current.is_day,
+        precip: data.current.precip_mm,
+        wind_kph: data.current.wind_kph,
+    }
+}
+
+let data = processCurrentWeatherData();
+console.log(data);
