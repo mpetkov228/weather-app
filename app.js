@@ -3,10 +3,17 @@ const API_KEY = '79d69622fa02417c8a8160044232011';
 const city = document.getElementById('location');
 const current = document.getElementById('current');
 
+const currentLocation = document.querySelector('.current-location');
+const currentDatetime = document.querySelector('.current-datetime');
+const currentCondition = document.querySelector('.current-condition');
+const currentTemp = document.querySelector('.current-temp');
+const currentIcon = document.querySelector('.current-icon');
+
 city.addEventListener('keyup', async (event) => {
     if (event.key == 'Enter') {
         let data = await getCurrentWeatherData(event.target.value);
-        console.log(data);
+        let processedData = await processCurrentWeatherData(data);
+        displayData(processedData);
         city.value = '';
     }
 });
@@ -33,9 +40,7 @@ async function getForecastData(location) {
     return data;
 }
 
-async function processCurrentWeatherData() {
-    let data = await getCurrentWeatherData('Sofia');
-
+async function processCurrentWeatherData(data) {
     return {
         condition: data.current.condition.text,
         location: data.location.name,
@@ -51,15 +56,21 @@ async function processCurrentWeatherData() {
     }
 }
 
-async function displayData() {
-    let data = await processCurrentWeatherData();
-
-    for (let key in data) {
-        const p = document.createElement('p');
-        p.textContent = data[key];
-
-        current.appendChild(p);
-    }
+async function displayData(data) {
+    currentLocation.textContent = data.location;
+    currentDatetime.textContent = data.localtime;
+    currentCondition.textContent = data.condition;
+    currentTemp.textContent = data.temp_c;
 }
 
-displayData();
+
+
+
+
+async function onLoad() {
+    let data = await getCurrentWeatherData('London');
+    let processed = await processCurrentWeatherData(data);
+    displayData(processed);
+}
+
+onLoad();
