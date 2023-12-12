@@ -5,7 +5,8 @@ const current = document.querySelector('.current');
 const details = document.querySelector('.details');
 
 const currentLocation = document.querySelector('.current-location');
-const currentDatetime = document.querySelector('.current-datetime');
+const currentDate = document.querySelector('.current-date');
+const currentTime = document.querySelector('.current-time');
 const currentCondition = document.querySelector('.current-condition');
 const currentTemp = document.querySelector('.current-temp');
 const currentIcon = document.querySelector('.current-icon');
@@ -50,7 +51,8 @@ async function processCurrentWeatherData(data) {
     return {
         condition: data.current.condition.text,
         location: data.location.name,
-        localtime: data.location.localtime,
+        localdate: data.location.localtime.split(' ')[0],
+        localtime: data.location.localtime.split(' ')[1],
         temp_c: data.current.temp_c,
         temp_f: data.current.temp_f,
         feelslike_c: data.current.feelslike_c,
@@ -64,15 +66,17 @@ async function processCurrentWeatherData(data) {
 
 async function displayData(data) {
     currentLocation.textContent = data.location;
-    currentDatetime.textContent = data.localtime;
+    currentDate.textContent = formatDate(data.localdate);
+    currentTime.textContent = data.localtime;
     currentCondition.textContent = data.condition;
-    currentTemp.textContent = data.temp_c;
+    currentTemp.textContent = `${data.temp_c} °C`;
 
     detailsFeel.textContent = data.feelslike_c;
     detailsHumidity.textContent = data.humidity;
     detailsPrecip.textContent = data.precip;
     detailsWind.textContent = data.wind_kph;
 }
+
 
 
 
@@ -85,3 +89,14 @@ async function onLoad() {
 }
 
 onLoad();
+
+
+
+
+
+function formatDate(string) {
+    let parsed = Date.parse(string);
+    let date = new Date(parsed);
+    
+    return date.toLocaleDateString('en-uk', { weekday: 'long', day: 'numeric', month: 'short', year: '2-digit'});
+}

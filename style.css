@@ -3,19 +3,47 @@
     margin: 0;
     padding: 0;
     color: white;
+    font-family: 'Arial Narrow Bold', sans-serif;
 }
 
 body {
     height: 100vh;
     width: 100vw;
-    background-image: url("assets/backgrounds/sun-sunlight-bright-outdoor-sky.jpg");
+    padding: 45px;
+    background-image: url("assets/backgrounds/night.jpg");
     background-size: cover;
     background-repeat: no-repeat;
 }
 
+.main {
+    display: flex;
+    justify-content: space-between;
+}
 
+.current-location {
+    font-size: 4rem;
+}
+
+.current-date {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.current-time {
+    margin-bottom: 20px;
+}
+
+.current-condition {
+    font-size: 2rem;
+}
+
+.current-temp {
+    font-size: 4rem;
+}
 
 input {
     background: none;
     border: none;
+    outline: none;
+    font-size: 1.2rem;
 }
