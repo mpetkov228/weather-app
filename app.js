@@ -1,13 +1,19 @@
 const API_KEY = '79d69622fa02417c8a8160044232011';
 
 const city = document.getElementById('location');
-const current = document.getElementById('current');
+const current = document.querySelector('.current');
+const details = document.querySelector('.details');
 
 const currentLocation = document.querySelector('.current-location');
 const currentDatetime = document.querySelector('.current-datetime');
 const currentCondition = document.querySelector('.current-condition');
 const currentTemp = document.querySelector('.current-temp');
 const currentIcon = document.querySelector('.current-icon');
+
+const detailsFeel = document.querySelector('.details-feel');
+const detailsHumidity = document.querySelector('.details-humidity');
+const detailsPrecip = document.querySelector('.details-precip');
+const detailsWind = document.querySelector('.details-wind');
 
 city.addEventListener('keyup', async (event) => {
     if (event.key == 'Enter') {
@@ -61,6 +67,11 @@ async function displayData(data) {
     currentDatetime.textContent = data.localtime;
     currentCondition.textContent = data.condition;
     currentTemp.textContent = data.temp_c;
+
+    detailsFeel.textContent = data.feelslike_c;
+    detailsHumidity.textContent = data.humidity;
+    detailsPrecip.textContent = data.precip;
+    detailsWind.textContent = data.wind_kph;
 }
 
 
