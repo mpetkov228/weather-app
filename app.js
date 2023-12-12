@@ -39,6 +39,7 @@ async function processCurrentWeatherData() {
     return {
         condition: data.current.condition.text,
         location: data.location.name,
+        localtime: data.location.localtime,
         temp_c: data.current.temp_c,
         temp_f: data.current.temp_f,
         feelslike_c: data.current.feelslike_c,
@@ -50,5 +51,15 @@ async function processCurrentWeatherData() {
     }
 }
 
-let data = processCurrentWeatherData();
-console.log(data);
+async function displayData() {
+    let data = await processCurrentWeatherData();
+
+    for (let key in data) {
+        const p = document.createElement('p');
+        p.textContent = data[key];
+
+        current.appendChild(p);
+    }
+}
+
+displayData();
