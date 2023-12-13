@@ -71,10 +71,10 @@ async function displayData(data) {
     currentCondition.textContent = data.condition;
     currentTemp.textContent = `${data.temp_c} °C`;
 
-    detailsFeel.textContent = data.feelslike_c;
-    detailsHumidity.textContent = data.humidity;
-    detailsPrecip.textContent = data.precip;
-    detailsWind.textContent = data.wind_kph;
+    detailsFeel.textContent = `${Math.round(data.feelslike_c)} °C`;
+    detailsHumidity.textContent = `${Math.round(data.humidity)} %`;
+    detailsPrecip.textContent = `${Math.round(data.precip)} %`;
+    detailsWind.textContent = `${Math.round(data.wind_kph)} km/h`;
 }
 
 

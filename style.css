@@ -41,6 +41,13 @@ body {
     font-size: 4rem;
 }
 
+.details {
+    font-size: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
 input {
     background: none;
     border: none;
