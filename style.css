@@ -9,7 +9,7 @@
 body {
     height: 100vh;
     width: 100vw;
-    padding: 45px;
+    padding: 45px 70px;
     background-image: url("assets/backgrounds/night.jpg");
     background-size: cover;
     background-repeat: no-repeat;
@@ -48,9 +48,24 @@ body {
     justify-content: space-evenly;
 }
 
+.detail-container {
+    display: flex;
+}
+
+.details-text {
+    font-size: 0.9rem;
+}
+
 input {
     background: none;
     border: none;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
+    color: white;
+    padding: 4px 8px;
+    border-bottom: 2px solid white;
+}
+
+::placeholder {
+    color: white;
 }
