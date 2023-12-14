@@ -15,27 +15,16 @@ const detailsHumidity = document.querySelector('.details-humidity');
 const detailsPrecip = document.querySelector('.details-precip');
 const detailsWind = document.querySelector('.details-wind');
 
+const forecastContainers = document.querySelectorAll('.forecast-day');
+
 city.addEventListener('keyup', async (event) => {
     if (event.key == 'Enter') {
-        let data = await getCurrentWeatherData(event.target.value);
-        let processedData = await processCurrentWeatherData(data);
-        displayData(processedData);
+        onLoad(city.value);
         city.value = '';
     }
 });
 
-async function getCurrentWeatherData(location) {
-    const url = `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${location}`;
-
-    const response = await fetch(url);
-    const data = await response.json();
-
-    console.log(data);
-
-    return data;
-}
-
-async function getForecastData(location) {
+async function getWeatherData(location) {
     const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`;
 
     const response = await fetch(url);
@@ -46,7 +35,7 @@ async function getForecastData(location) {
     return data;
 }
 
-async function processCurrentWeatherData(data) {
+async function processCurrentData(data) {
     return {
         condition: data.current.condition.text,
         location: data.location.name,
@@ -63,12 +52,26 @@ async function processCurrentWeatherData(data) {
     }
 }
 
-async function displayData(data) {
+async function processForecastData(data) {
+    const forecastArray = data.forecast.forecastday;
+    const newArray = forecastArray.map(day => {
+        const obj = {
+            date: day.date,
+            maxtemp: day.day.maxtemp_c,
+            mintemp: day.day.mintemp_c,
+            condition: day.day.condition.text
+        };
+        return obj;
+    });
+    return newArray;
+}
+
+async function displayCurrentData(data) {
     currentLocation.textContent = data.location;
     currentDate.textContent = formatDate(data.localdate);
     currentTime.textContent = data.localtime;
     currentCondition.textContent = data.condition;
-    currentTemp.textContent = `${data.temp_c} °C`;
+    currentTemp.textContent = `${Math.round(data.temp_c)} °C`;
 
     detailsFeel.textContent = `${Math.round(data.feelslike_c)} °C`;
     detailsHumidity.textContent = `${Math.round(data.humidity)} %`;
@@ -76,11 +79,25 @@ async function displayData(data) {
     detailsWind.textContent = `${Math.round(data.wind_kph)} km/h`;
 }
 
+function fillContainer(container, data) {
+    container.querySelector('.day-of-week').textContent = data.date;
+    container.querySelector('.max-temp').textContent = `${Math.round(data.maxtemp)} °C`;
+    container.querySelector('.min-temp').textContent = `${Math.round(data.mintemp)} °C`;
+}
+
+function displayForecastData(data) {
+    for (let i = 0; i < data.length; i++) {
+        fillContainer(forecastContainers[i], data[i]);
+    }
+}
+
 
 async function onLoad(location) {
-    let data = await getCurrentWeatherData(location);
-    let processed = await processCurrentWeatherData(data);
-    displayData(processed);
+    const data = await getWeatherData(location);
+    const current = await processCurrentData(data);
+    const forecast = await processForecastData(data);
+    displayCurrentData(current);
+    displayForecastData(forecast);
 }
 
 onLoad('London');
