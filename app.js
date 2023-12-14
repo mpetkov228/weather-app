@@ -73,7 +73,7 @@ async function displayData(data) {
 
     detailsFeel.textContent = `${Math.round(data.feelslike_c)} °C`;
     detailsHumidity.textContent = `${Math.round(data.humidity)} %`;
-    detailsPrecip.textContent = `${Math.round(data.precip)} %`;
+    detailsPrecip.textContent = `${data.precip.toFixed(2)} mm`;
     detailsWind.textContent = `${Math.round(data.wind_kph)} km/h`;
 }
 
@@ -82,13 +82,13 @@ async function displayData(data) {
 
 
 
-async function onLoad() {
-    let data = await getCurrentWeatherData('London');
+async function onLoad(location) {
+    let data = await getCurrentWeatherData(location);
     let processed = await processCurrentWeatherData(data);
     displayData(processed);
 }
 
-onLoad();
+onLoad('London');
 
 
 

@@ -50,6 +50,11 @@ body {
 
 .detail-container {
     display: flex;
+    gap: 5px;
+}
+
+.detail-container > div {
+    margin-top: 5px;
 }
 
 .details-text {
