@@ -19,7 +19,7 @@ const forecastContainers = document.querySelectorAll('.forecast-day');
 
 city.addEventListener('keyup', async (event) => {
     if (event.key == 'Enter') {
-        onLoad(city.value);
+        getWeather(city.value);
         city.value = '';
     }
 });
@@ -92,7 +92,7 @@ function displayForecastData(data) {
 }
 
 
-async function onLoad(location) {
+async function getWeather(location) {
     const data = await getWeatherData(location);
     const current = await processCurrentData(data);
     const forecast = await processForecastData(data);
@@ -100,4 +100,4 @@ async function onLoad(location) {
     displayForecastData(forecast);
 }
 
-onLoad('London');
+getWeather('London');

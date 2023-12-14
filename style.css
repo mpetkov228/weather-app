@@ -71,6 +71,22 @@ input {
     border-bottom: 2px solid white;
 }
 
-::placeholder {
-    color: white;
+.forecast {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+}
+
+.today, .day-of-week {
+    font-size: 1.7rem;
+}
+
+.max-temp {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.min-temp {
+    font-size: 1.2rem;
 }
