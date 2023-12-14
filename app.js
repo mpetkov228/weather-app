@@ -1,9 +1,8 @@
+import { formatDate } from "./utils.js";
+
 const API_KEY = '79d69622fa02417c8a8160044232011';
 
 const city = document.getElementById('location');
-const current = document.querySelector('.current');
-const details = document.querySelector('.details');
-
 const currentLocation = document.querySelector('.current-location');
 const currentDate = document.querySelector('.current-date');
 const currentTime = document.querySelector('.current-time');
@@ -78,10 +77,6 @@ async function displayData(data) {
 }
 
 
-
-
-
-
 async function onLoad(location) {
     let data = await getCurrentWeatherData(location);
     let processed = await processCurrentWeatherData(data);
@@ -89,14 +84,3 @@ async function onLoad(location) {
 }
 
 onLoad('London');
-
-
-
-
-
-function formatDate(string) {
-    let parsed = Date.parse(string);
-    let date = new Date(parsed);
-    
-    return date.toLocaleDateString('en-uk', { weekday: 'long', day: 'numeric', month: 'short', year: '2-digit'});
-}
