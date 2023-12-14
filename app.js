@@ -1,4 +1,4 @@
-import { formatDate } from "./utils.js";
+import { formatDate, getWeekday } from "./utils.js";
 
 const API_KEY = '79d69622fa02417c8a8160044232011';
 
@@ -56,7 +56,7 @@ async function processForecastData(data) {
     const forecastArray = data.forecast.forecastday;
     const newArray = forecastArray.map(day => {
         const obj = {
-            date: day.date,
+            date: getWeekday(formatDate(day.date)),
             maxtemp: day.day.maxtemp_c,
             mintemp: day.day.mintemp_c,
             condition: day.day.condition.text
