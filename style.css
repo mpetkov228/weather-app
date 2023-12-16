@@ -9,10 +9,12 @@
 body {
     height: 100vh;
     width: 100vw;
-    padding: 45px 70px;
-    background-image: url("assets/backgrounds/night.jpg");
+    padding: 45px 70px 20px 70px;
+    background-image: url("assets/backgrounds/dark-forest.jpg");
     background-size: cover;
     background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
 }
 
 .main {
@@ -89,4 +91,9 @@ input {
 
 .min-temp {
     font-size: 1.2rem;
+}
+
+footer {
+    text-align: center;
+    margin-top: auto;
 }
