@@ -59,7 +59,8 @@ async function processForecastData(data) {
             date: getWeekday(formatDate(day.date)),
             maxtemp: day.day.maxtemp_c,
             mintemp: day.day.mintemp_c,
-            condition: day.day.condition.text
+            condition: day.day.condition.text,
+            icon: getIcon(day.day.condition.text, 1),
         };
         return obj;
     });
@@ -84,6 +85,7 @@ function fillContainer(container, data) {
     container.querySelector('.day-of-week').textContent = data.date;
     container.querySelector('.max-temp').textContent = `${Math.round(data.maxtemp)} °C`;
     container.querySelector('.min-temp').textContent = `${Math.round(data.mintemp)} °C`;
+    container.querySelector('.forecast-icon-img').src = `assets/icons/${data.icon}`;
 }
 
 function displayForecastData(data) {
