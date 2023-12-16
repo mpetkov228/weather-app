@@ -1,4 +1,4 @@
-import { formatDate, getWeekday } from "./utils.js";
+import { formatDate, getWeekday, getIcon } from "./utils.js";
 
 const API_KEY = '79d69622fa02417c8a8160044232011';
 
@@ -8,7 +8,7 @@ const currentDate = document.querySelector('.current-date');
 const currentTime = document.querySelector('.current-time');
 const currentCondition = document.querySelector('.current-condition');
 const currentTemp = document.querySelector('.current-temp');
-const currentIcon = document.querySelector('.current-icon');
+const iconImg = document.querySelector('.icon-img');
 
 const detailsFeel = document.querySelector('.details-feel');
 const detailsHumidity = document.querySelector('.details-humidity');
@@ -46,9 +46,9 @@ async function processCurrentData(data) {
         feelslike_c: data.current.feelslike_c,
         fellslike_f: data.current.feelslike_f,
         humidity: data.current.humidity,
-        is_day: data.current.is_day,
         precip: data.current.precip_mm,
         wind_kph: data.current.wind_kph,
+        icon: getIcon(data.current.condition.text, data.current.is_day),
     }
 }
 
@@ -72,6 +72,7 @@ async function displayCurrentData(data) {
     currentTime.textContent = data.localtime;
     currentCondition.textContent = data.condition;
     currentTemp.textContent = `${Math.round(data.temp_c)} °C`;
+    iconImg.src = `assets/icons/${data.icon}`;
 
     detailsFeel.textContent = `${Math.round(data.feelslike_c)} °C`;
     detailsHumidity.textContent = `${Math.round(data.humidity)} %`;
