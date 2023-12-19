@@ -25,7 +25,7 @@ city.addEventListener('keyup', async (event) => {
 });
 
 async function getWeatherData(location) {
-    const url = `http://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`;
+    const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${location}&days=3`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -73,7 +73,7 @@ async function displayCurrentData(data) {
     currentTime.textContent = data.localtime;
     currentCondition.textContent = data.condition;
     currentTemp.textContent = `${Math.round(data.temp_c)} °C`;
-    iconImg.src = `assets/icons/${data.icon}`;
+    iconImg.src = `./assets/icons/${data.icon}`;
 
     detailsFeel.textContent = `${Math.round(data.feelslike_c)} °C`;
     detailsHumidity.textContent = `${Math.round(data.humidity)} %`;
@@ -85,7 +85,7 @@ function fillContainer(container, data) {
     container.querySelector('.day-of-week').textContent = data.date;
     container.querySelector('.max-temp').textContent = `${Math.round(data.maxtemp)} °C`;
     container.querySelector('.min-temp').textContent = `${Math.round(data.mintemp)} °C`;
-    container.querySelector('.forecast-icon-img').src = `assets/icons/${data.icon}`;
+    container.querySelector('.forecast-icon-img').src = `./assets/icons/${data.icon}`;
 }
 
 function displayForecastData(data) {
